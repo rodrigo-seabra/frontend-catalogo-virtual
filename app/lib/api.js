@@ -1,4 +1,4 @@
-const API_URL = "https://apicatalogovirtual.onrender.com"; // Substitua pela URL real da sua API
+const API_URL = "https://apicatalogovirtual.onrender.com";
 
 export async function fetchCars() {
   const response = await fetch(`${API_URL}/products/getall`);
