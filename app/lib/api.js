@@ -158,7 +158,12 @@ export async function registerUser(user) {
   formData.append("name", user.name);
   formData.append("email", user.email);
   formData.append("password", user.password);
+  formData.append("confirmpassword", user.confirmPassword);
 
+  formData.append("CPF", user.CPF);
+  formData.append("phone", user.phone);
+
+  console.log(user.password, user.confirmPassword);
   if (user.image) {
     formData.append("image", user.image, user.image.name);
   }

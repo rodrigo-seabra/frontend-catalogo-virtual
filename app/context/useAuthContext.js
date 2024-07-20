@@ -25,11 +25,21 @@ export function AuthProvider({ children }) {
     }
   }
 
-  async function register(email, password, name) {
+  async function register(
+    email,
+    password,
+    confirmPassword,
+    image,
+    name,
+    CPF,
+    phone
+  ) {
     setLoading(true);
     setError("");
+    const user = { email, password, confirmPassword, image, name, CPF, phone };
     try {
-      await registerUser(email, password, name);
+      console.log(user);
+      await registerUser(user);
     } catch (err) {
       setError(err.message);
     } finally {
