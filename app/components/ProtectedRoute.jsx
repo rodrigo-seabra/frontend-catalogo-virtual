@@ -3,8 +3,9 @@
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { useAuthContext } from "../context/useAuthContext";
+import Loading from "./Loading";
 
-const ProtectedRoute = ({ children }) => {
+export default function ProtectedRoute({ children }) {
   const { authorized, setRedirectUrl, initializing } = useAuthContext();
   const router = useRouter();
 
@@ -16,14 +17,12 @@ const ProtectedRoute = ({ children }) => {
   }, [authorized, router, setRedirectUrl, initializing]);
 
   if (initializing) {
-    return <p>Loading...</p>; // Ou algum componente de loading
+    return <Loading />;
   }
 
   if (!authorized) {
-    return <p>Redirecting...</p>; // Um componente de redirecionamento opcional
+    return <Loading />;
   }
 
   return children;
-};
-
-export default ProtectedRoute;
+}

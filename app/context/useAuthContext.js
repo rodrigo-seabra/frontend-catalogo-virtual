@@ -22,7 +22,9 @@ export function AuthProvider({ children }) {
       const { token } = await loginUser(email, password);
       localStorage.setItem("token", token);
       checkAuth();
-      router.push(redirectUrl);
+      if (router && redirectUrl) {
+        router.push(redirectUrl);
+      }
     } catch (err) {
       setError(err.message);
     } finally {
@@ -44,7 +46,9 @@ export function AuthProvider({ children }) {
     const user = { email, password, confirmPassword, image, name, CPF, phone };
     try {
       await registerUser(user);
-      router.push("/login");
+      if (router) {
+        router.push("/login");
+      }
     } catch (err) {
       setError(err.message);
     } finally {
@@ -89,7 +93,6 @@ export function AuthProvider({ children }) {
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }
 
-// Hook para usar o contexto
 export function useAuthContext() {
   const context = useContext(AuthContext);
   if (!context) {
