@@ -5,7 +5,7 @@ import { useAuthContext } from "../context/useAuthContext";
 import styles from "../styles/LoginForm.module.css";
 
 export default function LoginForm() {
-  const { login, error, loading } = useAuthContext();
+  const { login, error, loading, setRedirectUrl } = useAuthContext();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
