@@ -154,12 +154,10 @@ export async function fetchUserConsultations(userId) {
 
 export async function registerUser(user) {
   const formData = new FormData();
-
   formData.append("name", user.name);
   formData.append("email", user.email);
   formData.append("password", user.password);
   formData.append("confirmpassword", user.confirmPassword);
-
   formData.append("CPF", user.CPF);
   formData.append("phone", user.phone);
 
@@ -172,14 +170,19 @@ export async function registerUser(user) {
     method: "POST",
     body: formData,
   });
+  console.log(response);
 
   if (!response.ok) {
     const errorData = await response.json();
     throw new Error(errorData.message || "Erro ao cadastrar usuário");
+  } else {
+    const data = await response.json();
+    if (data.status == "Usuário já cadastrado") {
+      throw new Error("Usuário já cadastrado");
+    } else {
+      return data;
+    }
   }
-
-  const data = await response.json();
-  return data;
 }
 
 export async function loginUser(email, password) {
